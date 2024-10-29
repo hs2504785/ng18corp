@@ -1,0 +1,10 @@
+{
+  "name": "rochlab-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/rochlab-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["rochlab"],
+  "// targets": "to see all targets run: nx show project rochlab-e2e --web",
+  "targets": {}
+}
