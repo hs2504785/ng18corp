@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve rochlab",
-    "build": "nx build rochlab --base-href \"/ng18corp\"",
+    "build": "nx build rochlab --base-href \"/ng18corp/\"",
     "serve": "npm run build && cd /dist && npx serve",
     "deploy": "npm run build && ngh --dir=dist/apps/rochlab/browser --message=\"My deploy\""
   },
