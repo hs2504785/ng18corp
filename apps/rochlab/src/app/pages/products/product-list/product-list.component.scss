@@ -11,6 +11,10 @@
   height: 100%;
 }
 
+.product-item {
+  cursor: pointer;
+}
+
 @media (max-width: 468px) {
   .products .product {
     flex-direction: column;

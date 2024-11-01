@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { ApiService, SignalStateService } from '@lib/services';
-import { tap } from 'rxjs';
+import { of, tap } from 'rxjs';
 import { ProductInterface } from '../types/product.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -8,14 +8,32 @@ export class ProductService {
   private apiService = inject(ApiService);
   private signalStateService = inject(SignalStateService);
   private readonly apiUrl = 'products';
+  private isLoaded = signal(false); // Signal to track if products are loaded
+
+  // Signals for product list and selected product ID
+  selectedProductId = signal<string | null>(null);
+
+  // Derive the selected product based on selectedProductId and products
+  selectedProduct = computed(() => {
+    const productId = this.selectedProductId();
+    if (productId)
+      return this.products().find((product) => product.id === +productId);
+
+    return null;
+  });
 
   get products() {
     return this.signalStateService.entities;
   }
 
   fetchProducts() {
+    if (this.isLoaded()) {
+      return of(this.products());
+    }
+
     return this.apiService.getAll(this.apiUrl).pipe(
       tap((data) => {
+        this.isLoaded.set(true);
         this.signalStateService.setEntities(data);
       })
     );
@@ -46,5 +64,15 @@ export class ProductService {
         this.signalStateService.removeEntity((product) => product.id === id);
       })
     );
+  }
+
+  // Select a product by ID
+  selectProduct(id: string) {
+    this.selectedProductId.set(id);
+  }
+
+  // Clear product selection
+  clearSelection() {
+    this.selectedProductId.set(null);
   }
 }

@@ -1,0 +1,24 @@
+@if(selectedProduct()) {
+<div class="card card-body">
+  <div class="col-lg-6 product-item" tabindex="0">
+    <div class="product d-flex align-items-start">
+      <img
+        [ngSrc]="selectedProduct().image"
+        width="150"
+        height="150"
+        class="img-fluid"
+        alt="product image"
+      />
+    </div>
+    <div class="product-info">
+      <h4>{{ selectedProduct().title }}</h4>
+      <span>{{ selectedProduct().category }}</span>
+      <p>{{ selectedProduct().description }}</p>
+
+      <div class="badge bg-info mt-auto align-self-start">
+        {{ selectedProduct().price }}$
+      </div>
+    </div>
+  </div>
+</div>
+}

@@ -1,7 +1,12 @@
 <div class="container products">
   <div class="row gy-4">
     @for (item of products(); track item.id) {
-    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+    <div
+      class="col-lg-6 product-item"
+      (click)="goToDetails(item)"
+      tabindex="0"
+      (keyup.enter)="goToDetails(item)"
+    >
       <div class="product d-flex align-items-start">
         <div class="pic">
           <img
