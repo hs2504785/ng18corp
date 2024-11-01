@@ -1,0 +1,39 @@
+@import '../abstracts/variables';
+
+// .modal-header {
+//   padding-bottom: 0;
+// }
+
+.modal-body {
+  padding-top: 0;
+  padding-bottom: .5rem;
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: $gray-900;
+}
+// // Confirm Delete styles
+// .confirm-delete-dialog {
+//   width: 25rem;
+//   .modal-body {
+//     padding-top: 1.25rem;
+//     padding-bottom: 1rem;
+//   }
+// }
+
+// .delete-info-icon {
+//   border-radius: 28px;
+//   border: 8px solid var(--error-50, #fef3f2);
+//   background: var(--error-100, #fee4e2);
+//   display: flex;
+//   width: 48px;
+//   height: 48px;
+//   padding: 0;
+//   justify-content: center;
+//   align-items: center;
+//   flex-shrink: 0;
+//   color: #d92d20;
+//   font-size: 16px;
+// }

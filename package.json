@@ -4,9 +4,11 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve rochlab",
-    "build": "nx build rochlab --base-href \"/ng18corp/\"",
+    "build": "nx build rochlab --base-href \"/ng18corp/\" && npm run uncss",
     "serve": "npm run build && cd /dist && npx serve",
-    "deploy": "npm run build && ngh --dir=dist/apps/rochlab/browser --message=\"My deploy\""
+    "deploy": "npm run build && ngh --dir=dist/apps/rochlab/browser --message=\"My deploy\"",
+    "uncss": "node tools/scripts/uncss.js",
+    "purgecss": "purgecss --config tools/scripts/purgecss.config.js"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +20,8 @@
     "@angular/platform-browser": "~18.2.0",
     "@angular/platform-browser-dynamic": "~18.2.0",
     "@angular/router": "~18.2.0",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
   },
@@ -54,6 +58,7 @@
     "jest-preset-angular": "~14.1.0",
     "nx": "20.0.6",
     "prettier": "^2.6.2",
+    "purgecss": "^5.0.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",

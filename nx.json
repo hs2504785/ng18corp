@@ -68,10 +68,19 @@
   ],
   "generators": {
     "@nx/angular:application": {
-      "e2eTestRunner": "cypress",
-      "linter": "eslint",
       "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "scss",
+      "changeDetection": "OnPush",
+      "standalone": true
     }
   }
 }

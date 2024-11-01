@@ -1,0 +1,46 @@
+@import 'abstracts/variables';
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  --bs-form-invalid-border-color: #{$red-300};
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+  box-shadow:
+    0px 0px 0px 4px #fee4e2,
+    0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+.form-select.readonly,
+.form-control[readonly] {
+  color: #667085;
+  background-color: $gray-50;
+  opacity: 1;
+
+  &:focus {
+    box-shadow: none;
+    border-color: var(--bs-border-color);
+  }
+}
+
+ui-textfield svg-icon,
+ui-numberfield svg-icon,
+.field-wrapper .form-label+svg-icon,
+ui-select svg-icon {
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+ui-textfield:hover svg-icon,
+ui-select:hover svg-icon,
+ui-numberfield:hover svg-icon,
+.field-wrapper:hover .form-label+svg-icon {
+  opacity: 1;
+}
+
+
+.form-control::placeholder {
+  font-size: 0.875rem;
+  font-weight: 300;
+}

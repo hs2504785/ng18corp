@@ -1,0 +1,58 @@
+@import '../abstracts/variables';
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+}
+
+// Small badges
+.badge-sm {
+  --#{$prefix}badge-padding-x: #{$badge-padding-x-sm};
+  --#{$prefix}badge-padding-y: #{$badge-padding-y-sm};
+  @include rfs($badge-font-size-sm, --#{$prefix}badge-font-size);
+  --#{$prefix}badge-border-radius: $badge-border-radius;
+  height: 22px;
+}
+
+// Large badges
+.badge-lg {
+  --#{$prefix}badge-padding-x: #{$badge-padding-x-lg};
+  --#{$prefix}badge-padding-y: #{$badge-padding-y-lg};
+  @include rfs($badge-font-size-lg, --#{$prefix}badge-font-size);
+  --#{$prefix}badge-border-radius: $badge-border-radius;
+  height: 28px;
+}
+
+// Lighter versions of badges
+// Define a map with alt color variants
+$badge-alt-colors: (
+  'primary': ($blue-700,
+    $blue-50,
+  ),
+  'secondary': ($gray-700,
+    $gray-100,
+  ),
+  'success': ($green-700,
+    $green-50,
+  ),
+  'info': ($green-700,
+    $green-50,
+  ),
+  'warning': ($yellow-700,
+    $yellow-50,
+  ),
+  'danger': ($red-700,
+    $red-100,
+  ),
+  'disabled': ($gray-500,
+    $gray-200,
+  ),
+);
+
+// Loop through the map to generate alt badge classes
+@each $color-name, $color-values in $badge-alt-colors {
+  .badge-alt-#{$color-name} {
+    color: nth($color-values, 1);
+    background-color: nth($color-values, 2);
+  }
+}

@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'main';
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.action-icons {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+tr:hover .action-icons {
+  opacity: 1;
+}

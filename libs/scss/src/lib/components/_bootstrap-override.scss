@@ -1,0 +1,31 @@
+.btn:focus,
+.btn-outline-primary.focus {
+  box-shadow: none !important;
+}
+
+// Form
+
+// .was-validated {
+//   .form-control:invalid:focus,
+//   .form-select:invalid:focus,
+//   .form-check-input:invalid:focus,
+//   .form-control:valid:focus,
+//   .form-select:valid:focus,
+//   .form-check-input:valid:checked {
+//     box-shadow: none;
+//   }
+// }
+
+// .form-control.is-invalid:focus,
+// .form-select.is-invalid:focus,
+// .form-check-input.is-invalid:focus,
+// .form-control.is-valid:focus,
+// .form-select.is-valid:focus,
+// .form-check-input.is-valid:checked {
+//   box-shadow: none;
+// }
+
+// Breadcrumb
+// .breadcrumb-item + .breadcrumb-item::before {
+//   font-family: 'galeicons';
+// }

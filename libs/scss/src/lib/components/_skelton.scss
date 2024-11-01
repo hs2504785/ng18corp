@@ -1,0 +1,24 @@
+@import 'abstracts/variables';
+
+.sk-line,
+.sk-block {
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, $gray-100 18%, #ececec 33%);
+  border-radius: 2px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+.sk-line {
+  height: 15px;
+}
+
+.sk-block {
+  height: 90px;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}

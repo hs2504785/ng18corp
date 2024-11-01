@@ -1,0 +1,25 @@
+@import './abstracts/variables';
+@import '../../../../node_modules/bootstrap/scss/bootstrap';
+@import '../../../../node_modules/bootstrap-icons/font/bootstrap-icons';
+
+// GLOBAL
+@import 'base/global';
+@import 'components/animation';
+@import 'components/skelton';
+@import 'components/scrollbar';
+
+// COMPONENTS
+// @import 'components/card';
+// @import 'components/icon';
+// @import 'components/toast';
+// @import 'components/buttons';
+// @import 'components/modal';
+// @import 'components/forms';
+// @import 'components/input-group';
+// @import 'components/dropdown';
+// @import 'components/dropdown-menu';
+// @import 'components/badge';
+// @import 'components/search';
+// @import 'components/mat-autocomplete';
+// @import 'components/accordion';
+// @import 'components/offcanvas';

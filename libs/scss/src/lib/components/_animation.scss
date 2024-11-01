@@ -1,0 +1,54 @@
+@-webkit-keyframes spin-loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  -webkit-animation: spin-loader 2s linear infinite;
+  animation: spin-loader 2s linear infinite;
+}
+
+/* Zooming entrances */
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.zoom-in {
+  -webkit-animation: zoomIn .2s ease-in;
+  animation: zoomIn .2s ease-in;
+}

@@ -1,0 +1,21 @@
+@import 'abstracts/variables';
+
+.card {
+  &:hover {
+    box-shadow: $card-box-shadow;
+  }
+}
+
+.card-header {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.card-text {
+  color: $gray-500;
+}

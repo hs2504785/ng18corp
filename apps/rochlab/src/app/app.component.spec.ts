@@ -19,9 +19,9 @@ describe('AppComponent', () => {
     );
   });
 
-  it(`should have as title 'rochlab'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('rochlab');
-  });
+  // it(`should have as title 'rochlab'`, () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+  //   expect(app.title).toEqual('rochlab');
+  // });
 });

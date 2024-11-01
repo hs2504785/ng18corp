@@ -23,6 +23,9 @@
           }
         ],
         "styles": ["apps/rochlab/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/scss/src/lib", "apps/rochlab/src/scss"]
+        },
         "scripts": []
       },
       "configurations": {
