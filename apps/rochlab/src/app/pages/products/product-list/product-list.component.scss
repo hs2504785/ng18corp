@@ -1,0 +1,129 @@
+/*--------------------------------------------------------------
+# Doctors Section
+--------------------------------------------------------------*/
+.products .product {
+  background-color: var(--surface-color);
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-radius: 5px;
+  transition: 0.5s;
+  padding: 30px;
+  height: 100%;
+}
+
+@media (max-width: 468px) {
+  .products .product {
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+
+.products .product .pic {
+  overflow: hidden;
+  // width: 150px;
+  // border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.products .product .pic img {
+  transition: ease-in-out 0.3s;
+}
+
+.products .product:hover {
+  transform: translateY(-10px);
+}
+
+.products .product .product-info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+  height: 100%;
+  gap: 6px;
+}
+
+@media (max-width: 468px) {
+  .products .product .product-info {
+    padding: 30px 0 0 0;
+    text-align: center;
+  }
+}
+
+.products .product h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.products .product span {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+}
+
+.products .product span::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: color-mix(in srgb, var(--default-color), transparent 85%);
+  bottom: 0;
+  left: 0;
+}
+
+@media (max-width: 468px) {
+  .products .product span::after {
+    left: calc(50% - 25px);
+  }
+}
+
+.products .product p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+}
+
+.products .product .social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+}
+
+@media (max-width: 468px) {
+  .products .product .social {
+    justify-content: center;
+  }
+}
+
+.products .product .social a {
+  background: color-mix(in srgb, var(--default-color), transparent 94%);
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 36px;
+  height: 36px;
+}
+
+.products .product .social a i {
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  font-size: 16px;
+  margin: 0 2px;
+}
+
+.products .product .social a:hover {
+  background: var(--accent-color);
+}
+
+.products .product .social a:hover i {
+  color: var(--contrast-color);
+}
+
+.products .product .social a + a {
+  margin-left: 8px;
+}

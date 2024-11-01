@@ -17,9 +17,10 @@
     "paths": {
       "@env/*": ["apps/gale/src/environments/*"],
       "@lib/components": ["libs/components/src/index.ts"],
+      "@lib/interceptors": ["libs/interceptors/src/index.ts"],
       "@lib/scss": ["libs/scss/src/index.ts"],
       "@lib/services": ["libs/services/src/index.ts"],
-      "@lib/interceptors": ["libs/interceptors/src/index.ts"],
+      "@lib/pipes": ["libs/pipes/src/index.ts"],
       "@roch/*": ["apps/rochlab/src/app/*"]
     }
   },
