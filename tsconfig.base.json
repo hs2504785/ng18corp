@@ -18,6 +18,7 @@
       "@env/*": ["apps/gale/src/environments/*"],
       "@lib/scss": ["libs/scss/src/index.ts"],
       "@lib/services": ["libs/services/src/index.ts"],
+      "@lib/components": ["libs/components/src/index.ts"],
       "@roch/*": ["apps/rochlab/src/app/*"]
     }
   },
