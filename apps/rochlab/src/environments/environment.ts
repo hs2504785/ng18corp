@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  API_URL: 'https://qa-gale.kore.ai/api/v1/',
+  production: false,
+  API_URL: 'https://fakestoreapi.com',
 };
