@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng18corp/scss": ["libs/scss/src/index.ts"]
+      "@env/*": ["apps/gale/src/environments/*"],
+      "@lib/scss": ["libs/scss/src/index.ts"],
+      "@lib/services": ["libs/services/src/index.ts"],
+      "@roch/*": ["apps/rochlab/src/app/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
