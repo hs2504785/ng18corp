@@ -10,7 +10,7 @@ import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs';
 import { SeeAllPipe } from '@lib/pipes';
 import { Router } from '@angular/router';
-import { ToastService } from '@lib/components';
+import { ConfirmationDeleteService, ToastService } from '@lib/components';
 
 @Component({
   selector: 'app-product-list',
@@ -23,6 +23,7 @@ import { ToastService } from '@lib/components';
 export class ProductListComponent implements OnInit, OnDestroy {
   private productService = inject(ProductService);
   private toastService = inject(ToastService);
+  private confirmationDeleteService = inject(ConfirmationDeleteService);
   private router = inject(Router);
   products = this.productService.products;
   sub!: Subscription;
@@ -36,8 +37,24 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.router.navigate(['products', item.id, 'detail']);
   }
 
-  deleteProduct(event: Event, productId: any) {
+  async openConfirmDeleteModel(event: Event, productId: any) {
     event.stopImmediatePropagation();
+
+    const modalRef: any =
+      await this.confirmationDeleteService.openConfirmDeleteDialog();
+
+    modalRef.componentInstance.title = 'Delete Product';
+    modalRef.componentInstance.desc =
+      'Are you sure you want to delete this product?';
+
+    modalRef.closed.subscribe((shouldRemove: any) => {
+      if (shouldRemove) {
+        this.deleteProduct(productId);
+      }
+    });
+  }
+
+  deleteProduct(productId: any) {
     const removeSub = this.productService
       .deleteProduct(productId)
       .subscribe(() => {

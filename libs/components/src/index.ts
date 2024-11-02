@@ -6,3 +6,5 @@ export * from './lib/textfield/textfield.component';
 export * from './lib/submit/submit.component';
 export * from './lib/toast/toast.component';
 export * from './lib/toast/toast.service';
+export * from './lib/confirm-delete/confirm-delete.component';
+export * from './lib/confirm-delete/confirm-delete.service';

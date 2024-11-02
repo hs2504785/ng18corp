@@ -1,0 +1,24 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div class="modal-header">
+  <i class="bi bi-trash"></i>
+
+  <i class="btn-close" (click)="activeModal.dismiss()"></i>
+</div>
+<div class="modal-body">
+  <h4 class="modal-title mb-2">{{ title }}</h4>
+
+  <div [innerHTML]="desc"></div>
+</div>
+<div class="modal-footer d-flex justify-content-between">
+  <button
+    type="button"
+    class="btn btn-link ms-auto"
+    (click)="activeModal.close(false)"
+  >
+    {{ cancelVal }}
+  </button>
+  <button class="btn btn-danger" (click)="activeModal.close(true)" ngbAutoFocus>
+    {{ btnText }}
+  </button>
+</div>
