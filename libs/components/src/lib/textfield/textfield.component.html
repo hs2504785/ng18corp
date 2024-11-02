@@ -1,0 +1,36 @@
+<label
+  [class.visually-hidden]="!label"
+  [attr.for]="controlName"
+  class="form-label"
+  [class.required]="required"
+  >{{ label }}</label
+>
+
+<!-- @if (tooltipText) {
+  <svg-icon class="ms-2 cursor-pointer" src="assets/svg-icons/help-circle.svg"
+  [ngbTooltip]="tooltipText" [tooltipClass]="'textfield-tooltip'" container="body"></svg-icon>
+} -->
+
+<ng-content></ng-content>
+
+<input
+  type="text"
+  class="form-control"
+  [class.is-invalid]="showError"
+  [formControl]="control"
+  [id]="controlName"
+  [name]="controlName"
+  [required]="required"
+  [placeholder]="placeholder"
+  [readOnly]="isReadonly"
+  [type]="type"
+  [autocomplete]="autocomplete"
+  [min]="isMinRequired ? minValue : null"
+  [max]="isMaxRequired ? maxValue : null"
+  [maxlength]="maxLength"
+/>
+@if (showError) {
+<div class="invalid-feedback">
+  {{ patternErroeMsg || errorMessage }}
+</div>
+}

@@ -1,0 +1,9 @@
+@import "abstracts/variables";
+
+.spin-submit {
+  display: inline-flex;
+
+  path {
+    fill: $white;
+  }
+}

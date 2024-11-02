@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   imports: [],
   template: `
     <div class="d-flex align-items-center">
-      <div class="spinner-border me-2 text-primary" role="status">
+      <div class="spinner-border spinner-border-sm me-2" role="status">
         <span class="visually-hidden">{{ loaderText }}</span>
       </div>
       <span>{{ loaderText }}</span>
@@ -23,5 +23,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoaderInlineComponent {
-  @Input() loaderText: string = 'Loading...';
+  @Input() loaderText = 'Loading...';
 }

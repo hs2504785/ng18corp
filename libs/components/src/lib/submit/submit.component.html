@@ -1,0 +1,12 @@
+<button
+  class="btn btn-primary d-flex align-items-center justify-content-center flex-grow-1"
+  [attr.form]="formName"
+  [class.in-progress]="isSubmitting"
+  [disabled]="isSubmitting || isInvalid"
+>
+  @if (isSubmitting) {
+  <lib-loader-inline [loaderText]="submitingText"></lib-loader-inline>
+  } @else {
+  {{ submitText }}
+  }
+</button>

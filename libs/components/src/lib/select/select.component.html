@@ -1,0 +1,35 @@
+<label [for]="controlName" class="form-label">{{ label }}</label>
+
+@if (tooltipText) {
+  <svg-icon
+    class="ms-2 cursor-pointer"
+    src="assets/svg-icons/help-circle.svg"
+    [ngbTooltip]="tooltipText"
+  ></svg-icon>
+}
+
+<select
+  [id]="controlName"
+  [formControl]="control"
+  class="form-select"
+  [class.is-invalid]="showError"
+  [class.readonly]="isReadonly"
+  >
+  <option value="">{{ defaultOptionText }}</option>
+  @for (option of options; track option) {
+    <option [value]="option.value">
+      {{ option.name }}
+    </option>
+  }
+</select>
+<!-- @if (showError) {
+  <div class="invalid-feedback">
+    {{ errorMessage }}
+  </div>
+} -->
+
+@if (showError) {
+  <div class="invalid-feedback">
+    {{ patternErroeMsg || errorMessage }}
+  </div>
+}

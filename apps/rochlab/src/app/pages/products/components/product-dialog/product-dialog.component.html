@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeDialog.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" id="productForm" (submit)="onFormSubmit()">
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('title')"
+      controlName="title"
+      label="Title"
+      placeholder="Enter title"
+    ></lib-textfield>
+
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('category')"
+      controlName="category"
+      label="Category"
+      placeholder="Enter category"
+    ></lib-textfield>
+
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('description')"
+      controlName="description"
+      label="Description"
+      placeholder="Enter description"
+    ></lib-textfield>
+
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('price')"
+      [type]="'number'"
+      controlName="price"
+      label="Price"
+      placeholder="Enter price"
+    ></lib-textfield>
+  </form>
+</div>
+<div class="modal-footer">
+  <lib-submit
+    formName="productForm"
+    [isSubmitting]="isSubmitting"
+    [isInvalid]="form.invalid"
+    [submitText]="'Save product'"
+    [submitingText]="'Saving product'"
+  ></lib-submit>
+</div>

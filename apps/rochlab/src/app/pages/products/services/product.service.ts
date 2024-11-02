@@ -2,9 +2,11 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { ApiService, SignalStateService } from '@lib/services';
 import { of, tap } from 'rxjs';
 import { ProductInterface } from '../types/product.interface';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
+  private ngbModal = inject(NgbModal);
   private apiService = inject(ApiService);
   private signalStateService = inject(SignalStateService);
   private readonly apiUrl = 'products';
@@ -40,6 +42,7 @@ export class ProductService {
   }
 
   addProduct(product: ProductInterface) {
+    product.image = 'https://picsum.photos/150/150';
     return this.apiService.create(this.apiUrl, product).pipe(
       tap((newProduct) => {
         this.signalStateService.addEntity(newProduct);
@@ -74,5 +77,24 @@ export class ProductService {
   // Clear product selection
   clearSelection() {
     this.selectedProductId.set(null);
+  }
+
+  async openDialog(rowData?: any) {
+    const { ProductDialogComponent } = await import(
+      '../components/product-dialog/product-dialog.component'
+    );
+    const modalRef: NgbModalRef = this.ngbModal.open(ProductDialogComponent, {
+      centered: true,
+      scrollable: true,
+      size: 'md',
+      windowClass: 'product-dialog',
+    });
+
+    if (rowData) {
+      modalRef.componentInstance.data = rowData;
+      // modalRef.componentInstance.cd.detectChanges();
+    }
+
+    return modalRef;
   }
 }

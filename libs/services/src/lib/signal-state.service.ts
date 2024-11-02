@@ -18,7 +18,7 @@ export class SignalStateService<T> {
 
   // Add an entity to the signal state
   addEntity(entity: T) {
-    this.entitiesSignal.update((current) => [...current, entity]);
+    this.entitiesSignal.update((current) => [entity, ...current]);
   }
 
   // Update an entity in the signal state based on a unique identifier
