@@ -1,32 +1,53 @@
-<table class="table table-responsive">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td class="action-icons">
-        <i class="bi bi-pencil cursor-pointer text-primary"></i>
-        <i class="bi bi-trash3 ms-3 cursor-pointer text-danger"></i>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>twitter</td>
-    </tr>
-  </tbody>
-</table>
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+
+<div class="container d-flex justify-content-between align-items-center mb-4">
+  <h3>Users</h3>
+
+  <button class="btn btn-primary" (click)="openAddModal()">Add new user</button>
+</div>
+
+<div class="container">
+  @if(isLoading()) {
+  <lib-grid-skelton></lib-grid-skelton>
+  } @else {
+
+  <div class="container">
+    @if(users().length) {
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">User ID</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of users(); track item.id) {
+        <tr>
+          <th scope="row">{{ item.id }}</th>
+          <td>
+            <a
+              routerLink="/users/{{ item.id }}/detail"
+              class="btn btn-link btn-sm"
+              >{{ item.username }}</a
+            >
+          </td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.phone }}</td>
+          <td class="action-icons">
+            <i class="bi bi-pencil cursor-pointer text-primary"></i>
+            <i class="bi bi-trash3 ms-3 cursor-pointer text-danger"></i>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    } @else {
+    <div class="alert alert-info">There are no items.</div>
+    }
+  </div>
+  }
+</div>

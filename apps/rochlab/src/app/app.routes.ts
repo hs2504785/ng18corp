@@ -4,8 +4,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 export const appRoutes: Route[] = [
   {
     path: 'users',
-    loadComponent: () =>
-      import('./pages/users/users.component').then((m) => m.UsersComponent),
+    loadChildren: () =>
+      import('./pages/users/user.routes').then((m) => m.USER_ROUTES),
   },
   {
     path: 'products',

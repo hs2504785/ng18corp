@@ -16,7 +16,7 @@ export class ApiService<T> {
     return this.http.get<T[]>(`${this.BASE_URL}/${apiPath}`);
   }
 
-  getById(apiPath: string, id: string): Observable<T> {
+  getById(apiPath: string, id: any): Observable<T> {
     return this.http.get<T>(`${this.BASE_URL}/${apiPath}/${id}`);
   }
 
