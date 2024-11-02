@@ -50,8 +50,8 @@ export class ProductService {
     );
   }
 
-  updateProduct(id: string, updatedProduct: ProductInterface): void {
-    this.apiService.update(this.apiUrl, id, updatedProduct).pipe(
+  updateProduct(id: string, updatedProduct: ProductInterface) {
+    return this.apiService.update(this.apiUrl, id, updatedProduct).pipe(
       tap((updated) => {
         this.signalStateService.updateEntity(
           updated,

@@ -43,6 +43,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
       });
   }
 
+  async openEditModal(event: Event, data: any) {
+    event.stopImmediatePropagation();
+    const modalRef = await this.productService.openDialog(data);
+
+    const modalSub = modalRef.closed.subscribe({
+      next: (res: any) => {
+        if (res) {
+          // this.params.context.componentParent.editSuccess(res);
+        }
+      },
+      complete: () => {
+        // this.cd.detectChanges()
+      },
+    });
+    // this.sub?.add(modalSub);
+  }
+
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }

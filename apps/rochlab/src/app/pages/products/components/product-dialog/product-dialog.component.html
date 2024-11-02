@@ -1,5 +1,7 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+  <h4 class="modal-title" id="modal-basic-title">
+    {{ data?.id ? 'Update Product' : 'Add Product' }}
+  </h4>
   <button
     type="button"
     class="btn-close"
@@ -48,7 +50,7 @@
     formName="productForm"
     [isSubmitting]="isSubmitting"
     [isInvalid]="form.invalid"
-    [submitText]="'Save product'"
-    [submitingText]="'Saving product'"
+    [submitText]="data?.id ? 'Update product' : 'Save product'"
+    [submitingText]="data?.id ? 'Updating product' : 'Saving product'"
   ></lib-submit>
 </div>

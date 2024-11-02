@@ -47,11 +47,7 @@ export class ProductDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.data) {
-      this.form.patchValue({
-        ...this.data.WANDB,
-        name: this.data.connectionName,
-        type: this.data.type,
-      });
+      this.form.patchValue(this.data);
     }
     // this.cd.detectChanges();
   }
@@ -67,19 +63,51 @@ export class ProductDialogComponent implements OnInit, OnDestroy {
 
   onFormSubmit() {
     this.isSubmitting = true;
-    console.log(this.form.value, 'kooo');
 
-    const addSub = this.productService.addProduct(this.form.value).subscribe({
-      next: (res) => {
-        console.log('rree', res);
+    const serviceMethod = this.data
+      ? this.productService.updateProduct(this.data.id, {
+          ...this.form.value,
+          image: this.data.image,
+        })
+      : this.productService.addProduct(this.form.value);
+
+    const successMessage = this.data
+      ? 'UPDATE_CONNECTION_SUCCESS'
+      : 'WANDB_INTEGRATION_SUCCESS';
+
+    this.subscribeToService(serviceMethod, successMessage);
+
+    // const addSub = this.productService.addProduct(this.form.value).subscribe({
+    //   next: (res) => {
+    //     console.log('rree', res);
+    //   },
+
+    //   complete: () => {
+    //     this.isSubmitting = false;
+    //     this.activeDialog.close();
+    //   },
+    // });
+    // this.sub?.add(addSub);
+  }
+
+  subscribeToService(serviceMethod: any, successMessage: any) {
+    const integrationSub = serviceMethod.subscribe({
+      next: (res: any) => {
+        this.isSubmitting = false;
+        // this.toastService.success('message', null, true);
+        this.activeDialog.close();
       },
-
+      error: () => {
+        // this.cd.detectChanges();
+        // this.toastService.error(this.translateService.instant('WANDB_INTEGRATION_FAILURE'));
+      },
       complete: () => {
         this.isSubmitting = false;
         this.activeDialog.close();
       },
     });
-    this.sub?.add(addSub);
+
+    this.sub?.add(integrationSub);
   }
 
   ngOnDestroy(): void {
