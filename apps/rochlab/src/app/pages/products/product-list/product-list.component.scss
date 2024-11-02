@@ -13,6 +13,14 @@
 
 .product-item {
   cursor: pointer;
+
+  .icon {
+    display: none;
+  }
+
+  &:hover .icon {
+    display: inline;
+  }
 }
 
 @media (max-width: 468px) {

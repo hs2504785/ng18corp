@@ -1,12 +1,9 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <div class="container products">
   <div class="row gy-4">
     @for (item of products(); track item.id) {
-    <div
-      class="col-lg-6 product-item"
-      (click)="goToDetails(item)"
-      tabindex="0"
-      (keyup.enter)="goToDetails(item)"
-    >
+    <div class="col-lg-6 product-item" (click)="goToDetails(item)">
       <div class="product d-flex align-items-start">
         <div class="pic">
           <img
@@ -22,8 +19,15 @@
           <span>{{ item.category }}</span>
           <p>{{ item.description | seeAll }}</p>
 
-          <div class="badge bg-info mt-auto align-self-start">
-            {{ item.price }}$
+          <div class="product-footer mt-auto align-self-start d-flex w-100">
+            <div class="badge bg-info">{{ item.price }}$</div>
+            <i
+              class="bi bi-pencil cursor-pointer text-primary ms-auto icon"
+            ></i>
+            <i
+              class="bi bi-trash3 ms-3 cursor-pointer text-danger icon"
+              (click)="deleteProduct($event, item.id)"
+            ></i>
           </div>
         </div>
       </div>

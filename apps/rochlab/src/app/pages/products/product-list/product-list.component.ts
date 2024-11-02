@@ -34,6 +34,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.router.navigate(['products', item.id, 'detail']);
   }
 
+  deleteProduct(event: Event, productId: any) {
+    event.stopImmediatePropagation();
+    const removeSub = this.productService
+      .deleteProduct(productId)
+      .subscribe(() => {
+        removeSub.unsubscribe();
+      });
+  }
+
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }

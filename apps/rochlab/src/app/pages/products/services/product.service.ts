@@ -58,8 +58,8 @@ export class ProductService {
     );
   }
 
-  deleteProduct(id: string): void {
-    this.apiService.delete(this.apiUrl, id).pipe(
+  deleteProduct(id: string) {
+    return this.apiService.delete(this.apiUrl, id).pipe(
       tap(() => {
         this.signalStateService.removeEntity((product) => product.id === id);
       })

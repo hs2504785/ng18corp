@@ -24,6 +24,8 @@ module.exports = [
           style: 'kebab-case',
         },
       ],
+      '@angular-eslint/template/click-events-have-key-events': ['off'],
+      '@angular-eslint/template/interactive-supports-focus': ['off'],
     },
   },
   {
