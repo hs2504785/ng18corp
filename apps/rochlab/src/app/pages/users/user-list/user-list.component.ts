@@ -8,6 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 import {
   ConfirmationDeleteService,
+  EmptyScreenComponent,
   GridSkeltonComponent,
   ToastService,
 } from '@lib/components';
@@ -18,7 +19,12 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, GridSkeltonComponent, RouterLink],
+  imports: [
+    CommonModule,
+    GridSkeltonComponent,
+    RouterLink,
+    EmptyScreenComponent,
+  ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,62 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: calc(100vh - 90px);
+
+  .empty-screen-wrapper {
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+  }
+
+  .empty-title {
+    color: var(--gray-700, #344054);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 2px;
+  }
+
+  .desc-text {
+    color: var(--gray-500, #667085);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+
+    &:not(:empty) + .desc-default {
+      display: none;
+    }
+  }
+
+  ::ng-deep {
+    .action-buttons {
+      i {
+        position: relative;
+        top: 1px;
+        margin-right: 10px;
+      }
+
+      @media screen and (max-width: 400px) {
+        button {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .empty-lg {
+  height: 100%;
+}
+
+::ng-deep .empty-sm {
+  height: 100%;
+}

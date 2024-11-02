@@ -9,3 +9,4 @@ export * from './lib/toast/toast.service';
 export * from './lib/confirm-delete/confirm-delete.component';
 export * from './lib/confirm-delete/confirm-delete.service';
 export * from './lib/grid-skelton/grid-skelton.component';
+export * from './lib/empty-screen/empty-screen.component';

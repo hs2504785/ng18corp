@@ -1,11 +1,13 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
+@if(users().length) {
 <div class="container d-flex justify-content-between align-items-center mb-4">
   <h3>Users</h3>
 
   <button class="btn btn-primary" (click)="openAddModal()">Add new user</button>
 </div>
+}
 
 <div class="container">
   @if(isLoading()) {
@@ -46,7 +48,13 @@
       </tbody>
     </table>
     } @else {
-    <div class="alert alert-info">There are no items.</div>
+    <lib-empty-screen>
+      <div class="action-buttons">
+        <button type="button" class="btn btn-primary" (click)="openAddModal()">
+          Add new user
+        </button>
+      </div>
+    </lib-empty-screen>
     }
   </div>
   }
