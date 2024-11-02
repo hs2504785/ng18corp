@@ -1,0 +1,58 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+@for (toast of toastService.toasts; track toast) {
+<ngb-toast
+  [class]="toast.className"
+  [autohide]="true"
+  [delay]="toast.delay || 2000"
+  (hidden)="toastService.remove(toast)"
+  [header]="isTemplate(toast) ? toast.header : ''"
+>
+  @if (isTemplate(toast)) {
+  <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
+  } @else { @if (toast.iconUrl) {
+  <i class="bi bi-info-circle"></i>
+  }
+  <div
+    class="flex-grow-1"
+    [ngClass]="{ 'd-flex align-items-center': !toast.header }"
+  >
+    <div class="d-flex flex-grow-1" [class.align-items-center]="!toast.header">
+      <div class="content me-3">
+        @if (toast.header) {
+        <div class="toast-heading mb-1">
+          {{ toast.header }}
+        </div>
+        }
+        <div [class.toast-text]="toast.header">{{ toast.textOrTpl }}</div>
+      </div>
+      <i class="btn-close toast-close ms-auto" (click)="closeToast(toast)"></i>
+    </div>
+    @if (toast.buttons?.length) {
+    <div class="d-flex deployed-toast">
+      @for (button of toast.buttons; track button) { @if (button.type ===
+      'primary') {
+      <div
+        class="primary-btn"
+        (click)="button.callback(button.data); closeToast(toast)"
+      >
+        {{ button.label }}
+      </div>
+      } @if (button.type === 'secondary') {
+      <div
+        class="secondary-btn"
+        (click)="button.callback(button.data); closeToast(toast)"
+      >
+        {{ button.label }}
+      </div>
+      } @if (button.type === 'dismiss') {
+      <div class="secondary-btn" (click)="closeToast(toast)">Dismiss</div>
+      } }
+    </div>
+    } @if (isTemplatePartial(toast)) {
+    <ng-template [ngTemplateOutlet]="toast.template"></ng-template>
+    }
+  </div>
+  }
+</ngb-toast>
+}

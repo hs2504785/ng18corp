@@ -1,0 +1,27 @@
+:host {
+  top: 0;
+}
+
+.content {
+  word-break: break-word;
+  width: 90%;
+}
+
+.deployed-toast {
+  gap: 12px;
+  padding-top: 16px;
+  .primary-btn {
+    color: var(--gray-700, #344054);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    cursor: pointer;
+  }
+  .secondary-btn {
+    color: var(--gray-500, #667085);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    cursor: pointer;
+  }
+}

@@ -10,6 +10,7 @@ import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs';
 import { SeeAllPipe } from '@lib/pipes';
 import { Router } from '@angular/router';
+import { ToastService } from '@lib/components';
 
 @Component({
   selector: 'app-product-list',
@@ -21,6 +22,7 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   private productService = inject(ProductService);
+  private toastService = inject(ToastService);
   private router = inject(Router);
   products = this.productService.products;
   sub!: Subscription;
@@ -39,6 +41,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     const removeSub = this.productService
       .deleteProduct(productId)
       .subscribe(() => {
+        this.toastService.success('Product deleted successfully');
         removeSub.unsubscribe();
       });
   }

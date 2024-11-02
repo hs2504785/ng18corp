@@ -14,7 +14,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SubmitComponent, TextfieldComponent } from '@lib/components';
+import {
+  SubmitComponent,
+  TextfieldComponent,
+  ToastService,
+} from '@lib/components';
 import { ProductService } from '../../services/product.service';
 import { Subscription } from 'rxjs';
 
@@ -33,6 +37,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProductDialogComponent implements OnInit, OnDestroy {
   public activeDialog = inject(NgbActiveModal);
+  public toastService = inject(ToastService);
   private fb = inject(FormBuilder);
   private productService = inject(ProductService);
 
@@ -72,8 +77,8 @@ export class ProductDialogComponent implements OnInit, OnDestroy {
       : this.productService.addProduct(this.form.value);
 
     const successMessage = this.data
-      ? 'UPDATE_CONNECTION_SUCCESS'
-      : 'WANDB_INTEGRATION_SUCCESS';
+      ? 'Product updated successfully'
+      : 'Product added successfully';
 
     this.subscribeToService(serviceMethod, successMessage);
 
@@ -94,7 +99,7 @@ export class ProductDialogComponent implements OnInit, OnDestroy {
     const integrationSub = serviceMethod.subscribe({
       next: (res: any) => {
         this.isSubmitting = false;
-        // this.toastService.success('message', null, true);
+        this.toastService.success(successMessage);
         this.activeDialog.close();
       },
       error: () => {

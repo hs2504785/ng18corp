@@ -9,12 +9,22 @@ import {
 } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { LoaderComponent, LoaderService } from '@lib/components';
+import {
+  LoaderComponent,
+  LoaderService,
+  ToastComponent,
+} from '@lib/components';
 import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule, HeaderComponent, LoaderComponent],
+  imports: [
+    NxWelcomeComponent,
+    RouterModule,
+    HeaderComponent,
+    LoaderComponent,
+    ToastComponent,
+  ],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
