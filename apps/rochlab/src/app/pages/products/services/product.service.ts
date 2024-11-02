@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { ApiService, SignalStateService } from '@lib/services';
-import { of, tap } from 'rxjs';
+import { of, tap, finalize } from 'rxjs';
 import { ProductInterface } from '../types/product.interface';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,8 @@ export class ProductService {
   private apiService = inject(ApiService);
   private signalStateService = inject(SignalStateService);
   private readonly apiUrl = 'products';
-  private isLoaded = signal(false); // Signal to track if products are loaded
+  private isLoaded = signal(false);
+  isLoading = signal(false);
 
   // Signals for product list and selected product ID
   selectedProductId = signal<string | null>(null);
@@ -33,9 +34,13 @@ export class ProductService {
       return of(this.products());
     }
 
+    this.isLoading.set(true);
     return this.apiService.getAll(this.apiUrl).pipe(
-      tap((data) => {
+      finalize(() => {
         this.isLoaded.set(true);
+        this.isLoading.set(false);
+      }),
+      tap((data) => {
         this.signalStateService.setEntities(data);
       })
     );

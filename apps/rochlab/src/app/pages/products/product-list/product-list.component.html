@@ -1,40 +1,56 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
-<div class="container products">
-  <div class="row gy-4">
-    @for (item of products(); track item.id) {
-    <div class="col-lg-6 product-item" (click)="goToDetails(item)">
-      <div class="product d-flex align-items-start">
-        <div class="pic">
-          <img
-            [ngSrc]="item.image"
-            width="150"
-            height="150"
-            class="img-fluid"
-            alt="product image"
-          />
-        </div>
-        <div class="product-info">
-          <h4>{{ item.title }}</h4>
-          <span>{{ item.category }}</span>
-          <p>{{ item.description | seeAll }}</p>
 
-          <div class="product-footer mt-auto align-self-start d-flex w-100">
-            <div class="badge bg-secondary">{{ item.price }}$</div>
-            <i
-              class="bi bi-pencil cursor-pointer text-primary ms-auto icon"
-              (click)="openEditModal($event, item)"
-            ></i>
-            <i
-              class="bi bi-trash3 ms-3 cursor-pointer text-danger icon"
-              (click)="openConfirmDeleteModel($event, item.id)"
-            ></i>
+<div class="container d-flex justify-content-between align-items-center mb-4">
+  <h3>Products</h3>
+
+  <button class="btn btn-primary" (click)="openAddModal()">
+    Add new product
+  </button>
+</div>
+
+<div class="container">
+  @if(isLoading()) {
+  <lib-grid-skelton></lib-grid-skelton>
+  } @else {
+
+  <div class="container products">
+    <div class="row gy-4">
+      @for (item of products(); track item.id) {
+      <div class="col-lg-6 product-item" (click)="goToDetails(item)">
+        <div class="product d-flex align-items-start">
+          <div class="pic">
+            <img
+              [ngSrc]="item.image"
+              width="150"
+              height="150"
+              class="img-fluid"
+              alt="product image"
+            />
+          </div>
+          <div class="product-info">
+            <h4>{{ item.title }}</h4>
+            <span>{{ item.category }}</span>
+            <p>{{ item.description | seeAll }}</p>
+
+            <div class="product-footer mt-auto align-self-start d-flex w-100">
+              <div class="badge bg-secondary">{{ item.price }}$</div>
+              <i
+                class="bi bi-pencil cursor-pointer text-primary ms-auto icon"
+                (click)="openEditModal($event, item)"
+              ></i>
+              <i
+                class="bi bi-trash3 ms-3 cursor-pointer text-danger icon"
+                (click)="openConfirmDeleteModel($event, item.id)"
+              ></i>
+            </div>
           </div>
         </div>
       </div>
+      } @empty {
+      <div class="alert alert-info">There are no items.</div>
+      }
     </div>
-    } @empty {
-    <div class="alert alert-info">There are no items.</div>
-    }
   </div>
+  }
 </div>

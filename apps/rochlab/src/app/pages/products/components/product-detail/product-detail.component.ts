@@ -6,14 +6,14 @@ import {
   OnInit,
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage, RouterLink],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +23,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   sub!: Subscription;
   private productService = inject(ProductService);
   selectedProduct = this.productService.selectedProduct;
+  isLoading = this.productService.isLoading;
 
   ngOnInit() {
     this.sub = this.productService.fetchProducts().subscribe(() => {

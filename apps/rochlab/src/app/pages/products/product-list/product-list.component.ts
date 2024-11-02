@@ -10,12 +10,16 @@ import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs';
 import { SeeAllPipe } from '@lib/pipes';
 import { Router } from '@angular/router';
-import { ConfirmationDeleteService, ToastService } from '@lib/components';
+import {
+  ConfirmationDeleteService,
+  GridSkeltonComponent,
+  ToastService,
+} from '@lib/components';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, SeeAllPipe],
+  imports: [CommonModule, NgOptimizedImage, SeeAllPipe, GridSkeltonComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,11 +29,29 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private toastService = inject(ToastService);
   private confirmationDeleteService = inject(ConfirmationDeleteService);
   private router = inject(Router);
+  isLoading = this.productService.isLoading;
   products = this.productService.products;
   sub!: Subscription;
 
   ngOnInit(): void {
     this.sub = this.productService.fetchProducts().subscribe();
+  }
+
+  async openAddModal() {
+    // event.stopImmediatePropagation();
+    const modalRef = await this.productService.openDialog();
+
+    const modalSub = modalRef.closed.subscribe({
+      next: (res: any) => {
+        if (res) {
+          // this.params.context.componentParent.editSuccess(res);
+        }
+      },
+      complete: () => {
+        // this.cd.detectChanges()
+      },
+    });
+    this.sub?.add(modalSub);
   }
 
   goToDetails(item: any) {

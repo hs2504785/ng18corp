@@ -1,0 +1,36 @@
+<div class="skelton">
+  <div class="skelton-col col">
+    @for (item of skeltonData; track item) {
+    <div
+      class="sk-line"
+      [style.width]="item.width"
+      [style.margin-bottom]="item.margin"
+    ></div>
+    }
+  </div>
+</div>
+<div class="skelton">
+  <div class="skelton-col col2">
+    @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+    <div class="sk-line" style="width: 96px; margin-bottom: 32px"></div>
+    }
+  </div>
+</div>
+<div class="skelton">
+  <div class="skelton-col col3">
+    @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+    <div class="sk-line" style="width: 96px; margin-bottom: 32px"></div>
+    }
+  </div>
+</div>
+<div class="skelton">
+  <div class="skelton-col">
+    @for (item of skeltonData2; track item) {
+    <div
+      class="sk-line"
+      [style.width]="item.width"
+      [style.margin-bottom]="item.margin"
+    ></div>
+    }
+  </div>
+</div>
