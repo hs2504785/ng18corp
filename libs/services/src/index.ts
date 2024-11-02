@@ -1,2 +1,2 @@
 export * from './lib/api.service';
-export * from './lib/signal-state.service';
+export * from './lib/resource.service';

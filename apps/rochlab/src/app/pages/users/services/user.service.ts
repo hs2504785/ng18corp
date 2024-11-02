@@ -1,18 +1,18 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { ApiService, SignalStateService } from '@lib/services';
+import { ApiService, ResourceService } from '@lib/services';
 import { of, tap, finalize } from 'rxjs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UserInterface } from '../types/user.interface';
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
+export class UserService extends ResourceService<UserInterface> {
   private ngbModal = inject(NgbModal);
   private apiService = inject(ApiService);
-  private signalStateService = inject(SignalStateService);
   private readonly apiUrl = 'users';
   private isLoaded = signal(false);
   isLoading = signal(false);
   selectedUserId = signal<string | null>(null);
+  users = this.resources;
 
   selectedUser = computed(() => {
     const itemId = this.selectedUserId();
@@ -21,9 +21,9 @@ export class UserService {
     return null;
   });
 
-  get users() {
-    return this.signalStateService.entities;
-  }
+  // get users() {
+  //   return this.signalStateService.entities;
+  // }
 
   fetchUsers() {
     if (this.isLoaded()) {
@@ -32,12 +32,10 @@ export class UserService {
 
     this.isLoading.set(true);
     return this.apiService.getAll(this.apiUrl).pipe(
+      tap(this.setResources),
       finalize(() => {
         this.isLoaded.set(true);
         this.isLoading.set(false);
-      }),
-      tap((data) => {
-        this.signalStateService.setEntities(data);
       })
     );
   }
@@ -53,26 +51,24 @@ export class UserService {
 
   addUser(user: UserInterface) {
     return this.apiService.create(this.apiUrl, user).pipe(
-      tap((newUser) => {
-        this.signalStateService.addEntity(newUser);
+      tap((res: UserInterface) => {
+        this.upsertResource(res);
       })
     );
   }
 
   updateUser(id: string, updatedItem: UserInterface) {
     return this.apiService.update(this.apiUrl, id, updatedItem).pipe(
-      tap((updated) => {
-        this.signalStateService.updateEntity(updated, (item) => item.id === id);
+      tap((res: UserInterface) => {
+        this.upsertResource(res);
       })
     );
   }
 
   deleteProduct(id: string) {
-    return this.apiService.delete(this.apiUrl, id).pipe(
-      tap(() => {
-        this.signalStateService.removeEntity((item) => item.id === id);
-      })
-    );
+    return this.apiService
+      .delete(this.apiUrl, id)
+      .pipe(tap(() => this.removeResource(id)));
   }
 
   async openDialog(rowData?: any) {

@@ -12,6 +12,7 @@ import { SeeAllPipe } from '@lib/pipes';
 import { Router } from '@angular/router';
 import {
   ConfirmationDeleteService,
+  EmptyScreenComponent,
   GridSkeltonComponent,
   ToastService,
 } from '@lib/components';
@@ -19,7 +20,13 @@ import {
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, SeeAllPipe, GridSkeltonComponent],
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    SeeAllPipe,
+    GridSkeltonComponent,
+    EmptyScreenComponent,
+  ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

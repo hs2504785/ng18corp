@@ -1,16 +1,16 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { ApiService, SignalStateService } from '@lib/services';
+import { ApiService, ResourceService } from '@lib/services';
 import { of, tap, finalize } from 'rxjs';
 import { ProductInterface } from '../types/product.interface';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({ providedIn: 'root' })
-export class ProductService {
+export class ProductService extends ResourceService<any> {
   private ngbModal = inject(NgbModal);
   private apiService = inject(ApiService);
-  private signalStateService = inject(SignalStateService);
   private readonly apiUrl = 'products';
   private isLoaded = signal(false);
+  products = this.resources;
   isLoading = signal(false);
 
   // Signals for product list and selected product ID
@@ -25,10 +25,6 @@ export class ProductService {
     return null;
   });
 
-  get products() {
-    return this.signalStateService.entities;
-  }
-
   fetchProducts() {
     if (this.isLoaded()) {
       return of(this.products());
@@ -36,12 +32,10 @@ export class ProductService {
 
     this.isLoading.set(true);
     return this.apiService.getAll(this.apiUrl).pipe(
+      tap(this.setResources),
       finalize(() => {
         this.isLoaded.set(true);
         this.isLoading.set(false);
-      }),
-      tap((data) => {
-        this.signalStateService.setEntities(data);
       })
     );
   }
@@ -49,29 +43,24 @@ export class ProductService {
   addProduct(product: ProductInterface) {
     product.image = 'https://picsum.photos/150/150';
     return this.apiService.create(this.apiUrl, product).pipe(
-      tap((newProduct) => {
-        this.signalStateService.addEntity(newProduct);
+      tap((res: ProductInterface) => {
+        this.upsertResource(res);
       })
     );
   }
 
   updateProduct(id: string, updatedProduct: ProductInterface) {
     return this.apiService.update(this.apiUrl, id, updatedProduct).pipe(
-      tap((updated) => {
-        this.signalStateService.updateEntity(
-          updated,
-          (product) => product.id === id
-        );
+      tap((res: ProductInterface) => {
+        this.upsertResource(res);
       })
     );
   }
 
   deleteProduct(id: string) {
-    return this.apiService.delete(this.apiUrl, id).pipe(
-      tap(() => {
-        this.signalStateService.removeEntity((product) => product.id === id);
-      })
-    );
+    return this.apiService
+      .delete(this.apiUrl, id)
+      .pipe(tap(() => this.removeResource(id)));
   }
 
   // Select a product by ID
@@ -97,7 +86,6 @@ export class ProductService {
 
     if (rowData) {
       modalRef.componentInstance.data = rowData;
-      // modalRef.componentInstance.cd.detectChanges();
     }
 
     return modalRef;
