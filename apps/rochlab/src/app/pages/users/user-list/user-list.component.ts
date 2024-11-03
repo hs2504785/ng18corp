@@ -59,11 +59,6 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.sub?.add(modalSub);
   }
 
-  goToDetails(item: any) {
-    // this.userService.selectProduct(item.id);
-    // this.router.navigate(['products', item.id, 'detail']);
-  }
-
   async openConfirmDeleteModel(event: Event, productId: any) {
     event.stopImmediatePropagation();
 
@@ -92,19 +87,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   async openEditModal(event: Event, data: any) {
     event.stopImmediatePropagation();
-    const modalRef = await this.userService.openDialog(data);
-
-    const modalSub = modalRef.closed.subscribe({
-      next: (res: any) => {
-        if (res) {
-          // this.params.context.componentParent.editSuccess(res);
-        }
-      },
-      complete: () => {
-        // this.cd.detectChanges()
-      },
-    });
-    // this.sub?.add(modalSub);
+    await this.userService.openDialog(data);
   }
 
   ngOnDestroy(): void {

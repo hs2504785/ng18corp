@@ -60,7 +60,7 @@ export class UserService extends ResourceService<UserInterface> {
   updateUser(id: string, updatedItem: UserInterface) {
     return this.apiService.update(this.apiUrl, id, updatedItem).pipe(
       tap((res: UserInterface) => {
-        this.upsertResource(res);
+        this.upsertResource({ ...res, id: +id });
       })
     );
   }
