@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">User Login</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeDialog.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" id="loginForm" (submit)="onFormSubmit()">
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('username')"
+      controlName="username"
+      label="Username"
+      placeholder="Enter username"
+    ></lib-textfield>
+
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('password')"
+      controlName="password"
+      label="Password"
+      placeholder="Enter password"
+    ></lib-textfield>
+  </form>
+</div>
+<div class="modal-footer">
+  <lib-submit
+    formName="loginForm"
+    [isSubmitting]="isSubmitting"
+    [isInvalid]="form.invalid"
+    [submitText]="'Login'"
+    [submitingText]="'Logging in...'"
+  ></lib-submit>
+</div>

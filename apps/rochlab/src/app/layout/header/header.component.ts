@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '@lib/services';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,8 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   private renderer = inject(Renderer2);
+  private ngbModal = inject(NgbModal);
+  authService = inject(AuthService);
 
   @ViewChild('navmenu') navmenu!: ElementRef;
 
@@ -45,7 +49,13 @@ export class HeaderComponent {
     }
   }
 
-  openLoginModal() {
-    console.log('testt');
+  async openLoginModal() {
+    const { LoginComponent } = await import(
+      '../../shared/components/login/login.component'
+    );
+
+    return this.ngbModal.open(LoginComponent, {
+      centered: true,
+    });
   }
 }
