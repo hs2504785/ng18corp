@@ -65,7 +65,7 @@ export class UserService extends ResourceService<UserInterface> {
     );
   }
 
-  deleteProduct(id: string) {
+  deleteUser(id: string) {
     return this.apiService
       .delete(this.apiUrl, id)
       .pipe(tap(() => this.removeResource(id)));

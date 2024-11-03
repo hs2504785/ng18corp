@@ -59,30 +59,28 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.sub?.add(modalSub);
   }
 
-  async openConfirmDeleteModel(event: Event, productId: any) {
+  async openConfirmDeleteModel(event: Event, itemId: any) {
     event.stopImmediatePropagation();
 
     const modalRef: any =
       await this.confirmationDeleteService.openConfirmDeleteDialog();
 
-    modalRef.componentInstance.title = 'Delete Product';
+    modalRef.componentInstance.title = 'Remove User';
     modalRef.componentInstance.desc =
-      'Are you sure you want to delete this product?';
+      'Are you sure you want to delete this user?';
 
     modalRef.closed.subscribe((shouldRemove: any) => {
       if (shouldRemove) {
-        this.deleteProduct(productId);
+        this.deleteUser(itemId);
       }
     });
   }
 
-  deleteProduct(productId: any) {
-    const removeSub = this.userService
-      .deleteProduct(productId)
-      .subscribe(() => {
-        this.toastService.success('Product deleted successfully');
-        removeSub.unsubscribe();
-      });
+  deleteUser(itemId: any) {
+    const removeSub = this.userService.deleteUser(itemId).subscribe(() => {
+      this.toastService.success('User deleted successfully');
+      removeSub.unsubscribe();
+    });
   }
 
   async openEditModal(event: Event, data: any) {

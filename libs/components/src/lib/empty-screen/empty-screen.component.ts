@@ -12,6 +12,6 @@ export class EmptyScreenComponent {
   @Input() imgName = 'empty-state.jpg';
   @Input() width = 200;
   @Input() height = 200;
-  @Input() title = 'No data found!';
+  @Input() title = 'Nothing to show here!';
   @Input() desc = 'We got nothing to show... you got us!';
 }

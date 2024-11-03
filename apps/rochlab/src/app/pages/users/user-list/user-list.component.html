@@ -44,7 +44,10 @@
               class="bi bi-pencil cursor-pointer text-primary"
               (click)="openEditModal($event, item)"
             ></i>
-            <i class="bi bi-trash3 ms-3 cursor-pointer text-danger"></i>
+            <i
+              class="bi bi-trash3 ms-3 cursor-pointer text-danger"
+              (click)="openConfirmDeleteModel($event, item.id)"
+            ></i>
           </td>
         </tr>
         }
