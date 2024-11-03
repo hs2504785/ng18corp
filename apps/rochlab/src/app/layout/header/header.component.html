@@ -50,11 +50,16 @@
           </li>
           <li class="login">
             @if(authService.isLoggedInSignal()) {
-            <a class="cta-btn d-none d-sm-block" (click)="logout()">Logout</a>
+            <button class="cta-btn d-none d-sm-block" (click)="logout()">
+              Logout
+            </button>
             } @else {
-            <a class="cta-btn d-none d-sm-block" (click)="openLoginModal()"
-              >Login</a
+            <button
+              class="cta-btn d-none d-sm-block"
+              (click)="openLoginModal()"
             >
+              Login
+            </button>
             }
           </li>
         </ul>
