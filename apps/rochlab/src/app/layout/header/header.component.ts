@@ -44,4 +44,8 @@ export class HeaderComponent {
       this.closeMenu();
     }
   }
+
+  openLoginModal() {
+    console.log('testt');
+  }
 }

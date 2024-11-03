@@ -1,0 +1,7 @@
+.login {
+  cursor: pointer;
+
+  &:hover a {
+    color: #fff !important;
+  }
+}
