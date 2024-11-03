@@ -114,3 +114,32 @@ selectedProduct = this.productService.selectedProduct;
 ```
 
 - The values should be accessible by the lazy-loaded components, routers, or router guards. This might be useful for conditionally allowing navigation based on certain criteria, handling authentication, or passing data directly to the component.
+
+  > using resolver we can fetch and pass data to components before they are activated
+
+```js
+export const USER_ROUTES: Route[] = [
+  {
+    path: ':id/detail',
+    loadComponent: () =>
+      import('./components/user-detail/user-detail.component').then(
+        (m) => m.UserDetailComponent
+      ),
+    resolve: {
+      user: UserResolver,
+    },
+  },
+]
+
+// Access resolved data in any eager/lazy loaded component `this.route.snapshot.data['user']`
+export class UserDetailComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  selectedUser!: any;
+
+  ngOnInit() {
+    this.selectedUser = this.route.snapshot.data['user'];
+  }
+}
+```
+
+> for condinitional navigation we can use route guards
