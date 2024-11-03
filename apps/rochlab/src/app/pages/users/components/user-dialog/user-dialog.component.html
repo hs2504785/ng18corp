@@ -1,1 +1,121 @@
-<p>user-dialog works!</p>
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    {{ data?.id ? 'Update User' : 'Add User' }}
+  </h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeDialog.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" id="userForm" (submit)="onFormSubmit()">
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('email')"
+      controlName="email"
+      label="Email"
+      placeholder="Enter email"
+      ngbAutoFocus
+    ></lib-textfield>
+
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('username')"
+      controlName="username"
+      label="Username"
+      placeholder="Enter username"
+    ></lib-textfield>
+
+    <lib-textfield
+      class="d-block mb-4"
+      [control]="form.get('phone')"
+      controlName="phone"
+      label="Phone number"
+      placeholder="Enter phone"
+    ></lib-textfield>
+
+    <fieldset formGroupName="name" class="mb-4">
+      <legend>Name</legend>
+      <lib-textfield
+        class="d-block mb-4"
+        [control]="form.get('name.firstname')"
+        controlName="firstname"
+        label="First name"
+        placeholder="Enter firstname"
+      ></lib-textfield>
+
+      <lib-textfield
+        class="d-block mb-4"
+        [control]="form.get('name.lastname')"
+        controlName="lastname"
+        label="Last name"
+        placeholder="Enter lastname"
+      ></lib-textfield>
+    </fieldset>
+
+    <fieldset formGroupName="address" class="mb-3">
+      <legend>Address</legend>
+      <lib-textfield
+        class="d-block mb-4"
+        [control]="form.get('address.street')"
+        controlName="street"
+        label="Street"
+        placeholder="Enter street"
+      ></lib-textfield>
+
+      <lib-textfield
+        class="d-block mb-4"
+        [control]="form.get('address.number')"
+        controlName="number"
+        label="Door number"
+        placeholder="Enter door number"
+      ></lib-textfield>
+
+      <lib-textfield
+        class="d-block mb-4"
+        [control]="form.get('address.city')"
+        controlName="city"
+        label="City"
+        placeholder="Enter city"
+      ></lib-textfield>
+
+      <lib-textfield
+        class="d-block mb-4"
+        [control]="form.get('address.zipcode')"
+        controlName="zipcode"
+        label="Zip"
+        placeholder="Enter zipcode"
+      ></lib-textfield>
+
+      <fieldset formGroupName="geolocation">
+        <legend>Geo location</legend>
+        <lib-textfield
+          class="d-block mb-4"
+          [control]="form.get('address.geolocation.lat')"
+          controlName="lat"
+          label="Latitude"
+          placeholder="Enter latitude"
+        ></lib-textfield>
+
+        <lib-textfield
+          class="d-block mb-4"
+          [control]="form.get('address.geolocation.long')"
+          controlName="long"
+          label="Longitude"
+          placeholder="Enter longitude"
+        ></lib-textfield>
+      </fieldset>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <lib-submit
+    formName="userForm"
+    [isSubmitting]="isSubmitting"
+    [isInvalid]="form.invalid"
+    [submitText]="data?.id ? 'Update user' : 'Save user'"
+    [submitingText]="data?.id ? 'Updating user' : 'Saving user'"
+  ></lib-submit>
+</div>

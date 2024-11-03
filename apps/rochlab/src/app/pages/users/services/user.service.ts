@@ -52,7 +52,7 @@ export class UserService extends ResourceService<UserInterface> {
   addUser(user: UserInterface) {
     return this.apiService.create(this.apiUrl, user).pipe(
       tap((res: UserInterface) => {
-        this.upsertResource(res);
+        this.upsertResource({ ...res, ...user });
       })
     );
   }
