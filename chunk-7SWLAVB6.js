@@ -1,1 +1,0 @@
-import"./chunk-2VMXMS7J.js";var o=[{path:":id/detail",loadComponent:()=>import("./chunk-A55KM35G.js").then(t=>t.ProductDetailComponent)},{path:"",loadComponent:()=>import("./chunk-PHG625DK.js").then(t=>t.ProductListComponent)}];export{o as PRODUCT_ROUTES};
