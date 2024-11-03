@@ -143,3 +143,29 @@ export class UserDetailComponent implements OnInit {
 ```
 
 > for condinitional navigation we can use route guards
+
+```js
+// I want secret page to be accessible to authenticated user
+// AuthGuard used for conditional routing
+{
+  path: 'secret',
+  loadComponent: () =>
+    import('./pages/secret/secret.component').then((m) => m.SecretComponent),
+  canActivate: [AuthGuard],
+},
+
+// AuthGuard
+// return true from canActivate to allow access, to bloclk access return false
+canActivate(
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): boolean {
+  if (this.authService.isLoggedInSignal()) {
+    return true;
+  } else {
+    this.toastService.error('Please login to access secret page.');
+    this.router.navigate(['/']);
+    return false;
+  }
+}
+```
