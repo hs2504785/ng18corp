@@ -20,6 +20,6 @@ export class UserDetailComponent implements OnInit {
   selectedUser!: any;
 
   ngOnInit() {
-    this.selectedUser = this.route.snapshot.data;
+    this.selectedUser = this.route.snapshot.data['user'];
   }
 }

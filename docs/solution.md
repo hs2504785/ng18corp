@@ -46,7 +46,7 @@ export const appRoutes: Route[] = [
 
 Angular 17+ have signal that we are using for state management. from any eager/lazy loaded module set signal value ( mySignal.set(val) ) that you can access from any other eager/lazy loaded module
 
-Reference: `libs/services/src/lib/api.service.ts`, `libs/services/src/lib/signal-state.service.ts`
+Reference: `libs/services/src/lib/api.service.ts`, `libs/services/src/lib/resource.service.ts`
 
 6. Dynamically register additional routes inside the lazy-loaded module when it is initialized:
    - When the lazy-loaded module gets initialized, it should dynamically register additional routes. This means the routes should not be predefined but instead added at runtime.
