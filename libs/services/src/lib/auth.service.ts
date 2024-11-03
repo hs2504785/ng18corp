@@ -40,7 +40,6 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);
-    this.isLoggedInSignal.set(false); // Update the signal on logout
-    this.router.navigate(['/login']);
+    this.isLoggedInSignal.set(false);
   }
 }

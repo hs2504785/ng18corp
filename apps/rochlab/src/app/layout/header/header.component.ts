@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '@lib/services';
+import { ToastService } from '@lib/components';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ import { AuthService } from '@lib/services';
 export class HeaderComponent {
   private renderer = inject(Renderer2);
   private ngbModal = inject(NgbModal);
+  private toastService = inject(ToastService);
   authService = inject(AuthService);
 
   @ViewChild('navmenu') navmenu!: ElementRef;
@@ -57,5 +59,10 @@ export class HeaderComponent {
     return this.ngbModal.open(LoginComponent, {
       centered: true,
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.toastService.success('Logged out successfully');
   }
 }

@@ -42,9 +42,7 @@
           </li>
           <li class="login">
             @if(authService.isLoggedInSignal()) {
-            <a class="cta-btn d-none d-sm-block" (click)="openLoginModal()"
-              >Logout</a
-            >
+            <a class="cta-btn d-none d-sm-block" (click)="logout()">Logout</a>
             } @else {
             <a class="cta-btn d-none d-sm-block" (click)="openLoginModal()"
               >Login</a
