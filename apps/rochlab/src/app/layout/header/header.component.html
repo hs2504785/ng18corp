@@ -1,3 +1,5 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <header id="header" class="header sticky-top">
   <div class="branding d-flex align-items-center">
     <div
@@ -9,20 +11,40 @@
         <h1 class="sitename">ROCH CORP</h1>
       </a>
 
-      <nav id="navmenu" class="navmenu">
+      <nav id="navmenu" class="navmenu" #navmenu>
         <ul>
           <li>
-            <a routerLink="/">Home<br /></a>
-          </li>
-          <li><a routerLink="/users" routerLinkActive="active">Users</a></li>
-          <li>
-            <a routerLink="/products" routerLinkActive="active">Products</a>
+            <a (click)="closeMenu()" routerLink="/">Home<br /></a>
           </li>
           <li>
-            <a routerLink="/categories" routerLinkActive="active">Categories</a>
+            <a
+              (click)="closeMenu()"
+              routerLink="/users"
+              routerLinkActive="active"
+              >Users</a
+            >
+          </li>
+          <li>
+            <a
+              (click)="closeMenu()"
+              routerLink="/products"
+              routerLinkActive="active"
+              >Products</a
+            >
+          </li>
+          <li>
+            <a
+              (click)="closeMenu()"
+              routerLink="/categories"
+              routerLinkActive="active"
+              >Categories</a
+            >
           </li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        <i
+          class="mobile-nav-toggle d-xl-none bi bi-list"
+          (click)="toggleMenu()"
+        ></i>
       </nav>
     </div>
   </div>
