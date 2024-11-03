@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from '@lib/services';
 
 export const appRoutes: Route[] = [
   {
@@ -18,6 +19,12 @@ export const appRoutes: Route[] = [
       import('./pages/categories/categories.component').then(
         (m) => m.CategoriesComponent
       ),
+  },
+  {
+    path: 'secret',
+    loadComponent: () =>
+      import('./pages/secret/secret.component').then((m) => m.SecretComponent),
+    canActivate: [AuthGuard],
   },
   {
     path: '',
