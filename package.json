@@ -10,7 +10,11 @@
     "uncss": "node tools/scripts/uncss.js",
     "purgecss": "purgecss --config tools/scripts/purgecss.config.js",
     "sme-build": "nx build rochlab --source-map",
-    "sme": "npm run sme-build && source-map-explorer dist/apps/rochlab/**/*.js --no-border-checks"
+    "sme": "npm run sme-build && source-map-explorer dist/apps/rochlab/**/*.js --no-border-checks",
+    "lint": "nx lint rochlab",
+    "lint:fix": "nx lint rochlab --fix",
+    "lint:all": "nx run-many --targets=lint --all",
+    "lint:affected": "nx affected:lint"
   },
   "private": true,
   "dependencies": {
