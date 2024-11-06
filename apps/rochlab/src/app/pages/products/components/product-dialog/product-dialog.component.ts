@@ -70,11 +70,11 @@ export class ProductDialogComponent implements OnInit, OnDestroy {
     this.isSubmitting = true;
 
     const serviceMethod = this.data
-      ? this.productService.updateProduct(this.data.id, {
+      ? this.productService.update(this.data.id, {
           ...this.form.value,
           image: this.data.image,
         })
-      : this.productService.addProduct(this.form.value);
+      : this.productService.create(this.form.value);
 
     const successMessage = this.data
       ? 'Product updated successfully'

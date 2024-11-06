@@ -83,26 +83,14 @@ export class UserDialogComponent implements OnInit, OnDestroy {
     this.isSubmitting = true;
 
     const serviceMethod = this.data
-      ? this.userService.updateUser(this.data.id, this.form.value)
-      : this.userService.addUser(this.form.value);
+      ? this.userService.update(this.data.id, this.form.value)
+      : this.userService.create(this.form.value);
 
     const successMessage = this.data
       ? 'User updated successfully'
       : 'User added successfully';
 
     this.subscribeToService(serviceMethod, successMessage);
-
-    // const formSub = this.userService.addUser(this.form.value).subscribe({
-    //   next: (res) => {
-    //     console.log('rree', res);
-    //   },
-
-    //   complete: () => {
-    //     this.isSubmitting = false;
-    //     this.activeDialog.close();
-    //   },
-    // });
-    // this.sub?.add(formSub);
   }
 
   subscribeToService(serviceMethod: any, successMessage: any) {

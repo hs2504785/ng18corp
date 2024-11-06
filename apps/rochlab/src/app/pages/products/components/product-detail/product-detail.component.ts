@@ -22,13 +22,13 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   sub!: Subscription;
   private productService = inject(ProductService);
-  selectedProduct = this.productService.selectedProduct;
+  selectedProduct: any = this.productService.selected;
   isLoading = this.productService.isLoading;
 
   ngOnInit() {
-    this.sub = this.productService.fetchProducts().subscribe(() => {
+    this.sub = this.productService.fetchAll().subscribe(() => {
       const productId: any = this.route.snapshot.paramMap.get('id');
-      this.productService.selectProduct(productId);
+      this.productService.selectedId.set(productId);
     });
   }
 

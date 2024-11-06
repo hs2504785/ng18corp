@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   sub!: Subscription;
 
   ngOnInit(): void {
-    this.sub = this.userService.fetchUsers().subscribe();
+    this.sub = this.userService.fetchAll().subscribe();
   }
 
   async openAddModal() {
@@ -77,7 +77,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(itemId: any) {
-    const removeSub = this.userService.deleteUser(itemId).subscribe(() => {
+    const removeSub = this.userService.delete(itemId).subscribe(() => {
       this.toastService.success('User deleted successfully');
       removeSub.unsubscribe();
     });

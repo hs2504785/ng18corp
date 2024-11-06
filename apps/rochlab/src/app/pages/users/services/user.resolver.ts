@@ -1,32 +1,36 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import {
-  ActivatedRoute,
   ActivatedRouteSnapshot,
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
 import { UserInterface } from '../types/user.interface';
 import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserResolver implements Resolve<UserInterface> {
-  constructor(
-    private userService: UserService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private userService: UserService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<UserInterface> | Promise<UserInterface> | UserInterface {
+  ): Observable<UserInterface> {
     const userId = route.paramMap.get('id');
-    const user = route.data['user']; // Check if user data is already available
+    const user = route.data['user'];
 
     if (user) {
       return of(user);
-    } else {
-      return this.userService.getUser(userId);
+    } else if (userId) {
+      return this.userService.getById(userId).pipe(
+        catchError(() => {
+          return of({} as UserInterface);
+        }),
+        map((user) => user || ({} as UserInterface))
+      );
     }
+
+    return of({} as UserInterface);
   }
 }

@@ -41,7 +41,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   sub!: Subscription;
 
   ngOnInit(): void {
-    this.sub = this.productService.fetchProducts().subscribe();
+    this.sub = this.productService.fetchAll().subscribe();
   }
 
   async openAddModal() {
@@ -62,7 +62,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   goToDetails(item: any) {
-    this.productService.selectProduct(item.id);
+    this.productService.selectedId.set(item.id);
     this.router.navigate(['products', item.id, 'detail']);
   }
 
@@ -84,12 +84,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct(productId: any) {
-    const removeSub = this.productService
-      .deleteProduct(productId)
-      .subscribe(() => {
-        this.toastService.success('Product deleted successfully');
-        removeSub.unsubscribe();
-      });
+    const removeSub = this.productService.delete(productId).subscribe(() => {
+      this.toastService.success('Product deleted successfully');
+      removeSub.unsubscribe();
+    });
   }
 
   async openEditModal(event: Event, data: any) {
