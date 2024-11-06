@@ -21,6 +21,11 @@ export const appRoutes: Route[] = [
       ),
   },
   {
+    path: 'cart',
+    loadComponent: () =>
+      import('./pages/cart/cart.component').then((m) => m.CartComponent),
+  },
+  {
     path: 'secret',
     loadComponent: () =>
       import('./pages/secret/secret.component').then((m) => m.SecretComponent),

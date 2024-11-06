@@ -16,6 +16,7 @@ import {
   GridSkeltonComponent,
   ToastService,
 } from '@lib/components';
+import { CartStoreService } from '@roch/pages/cart/services/cart-store.service';
 
 @Component({
   selector: 'app-product-list',
@@ -36,6 +37,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private toastService = inject(ToastService);
   private confirmationDeleteService = inject(ConfirmationDeleteService);
   private router = inject(Router);
+  private cartStore = inject(CartStoreService);
   isLoading = this.productService.isLoading;
   products = this.productService.products;
   sub!: Subscription;
@@ -105,6 +107,30 @@ export class ProductListComponent implements OnInit, OnDestroy {
       },
     });
     // this.sub?.add(modalSub);
+  }
+
+  getItemQuantity = (productId: number) =>
+    this.cartStore.getItemQuantity(productId);
+
+  addToCart(event: Event, product: any) {
+    event.stopImmediatePropagation();
+    this.cartStore.addToCart(product);
+  }
+
+  increaseQuantity(event: Event, productId: number) {
+    event.stopImmediatePropagation();
+    const currentQty = this.getItemQuantity(productId)();
+    this.cartStore.updateQuantity(productId, currentQty + 1);
+  }
+
+  decreaseQuantity(event: Event, productId: number) {
+    event.stopImmediatePropagation();
+    const currentQty = this.getItemQuantity(productId)();
+    if (currentQty === 1) {
+      this.cartStore.removeFromCart(productId);
+    } else {
+      this.cartStore.updateQuantity(productId, currentQty - 1);
+    }
   }
 
   ngOnDestroy(): void {
